@@ -3,8 +3,7 @@ import { FaPhone } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 
 import styles from './Contact.module.css';
-
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/contactsOps';
 
 const Contact = ({ contactData }) => {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const Contact = ({ contactData }) => {
         </div>
         <div className={styles.phoneContainer}>
           <FaPhone />
-          <p>{contactData.phoneNumber}</p>
+          <p>{contactData.number}</p>
         </div>
       </div>
 

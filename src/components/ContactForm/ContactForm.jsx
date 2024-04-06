@@ -4,11 +4,11 @@ import * as Yup from 'yup';
 import { FaUserLock } from 'react-icons/fa6';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
 
 import styles from './ContactForm.module.css';
+import { addContact } from '../../redux/contactsOps';
 
-import { addContact } from '../../redux/contactsSlice';
+// import { addContact } from '../../redux/contactsSlice';
 
 const ContactForm = () => {
   const dataValidationSchema = Yup.object().shape({
@@ -16,11 +16,11 @@ const ContactForm = () => {
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
-    phoneNumber: Yup.string()
+    number: Yup.string()
       .matches(/^\d+$/, 'Phone number is not valid')
       .required('Required')
-      .min(7, 'Too Short!')
-      .max(7, 'Too Long!'),
+      .min(10, 'Too Short!')
+      .max(10, 'Too Long!'),
   });
 
   const usernameId = useId();
@@ -28,7 +28,7 @@ const ContactForm = () => {
 
   const dispatch = useDispatch();
   const addUser = (data, actions) => {
-    dispatch(addContact({ ...data, id: nanoid(5) }));
+    dispatch(addContact({ ...data }));
     actions.resetForm();
   };
 
@@ -38,7 +38,7 @@ const ContactForm = () => {
     <Formik
       initialValues={{
         name: '',
-        phoneNumber: '',
+        number: '',
       }}
       onSubmit={addUser}
       validationSchema={dataValidationSchema}
@@ -74,12 +74,12 @@ const ContactForm = () => {
           <label htmlFor={phoneNumberId}>Number</label>
           <Field
             type="text"
-            name="phoneNumber"
+            name="number"
             id={phoneNumberId}
             className={styles.inputField}
           />
           <ErrorMessage
-            name="phoneNumber"
+            name="number"
             render={msg => <span className={styles.formError}>{msg}</span>}
           />
         </div>

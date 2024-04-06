@@ -3,3 +3,8 @@
     flex-wrap: wrap;
     gap: 12px;
 }
+
+.noContacts {
+    margin-top: 50px;
+    font-weight: 600;
+}
